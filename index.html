@@ -45,14 +45,20 @@
             justify-content: space-between;
         }
         .glow-blue {
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), inset 0 0 10px rgba(56, 189, 248, 0.2);
         }
         .glow-gold {
             box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
         }
+        .glow-neon-green {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), inset 0 0 10px rgba(34, 197, 94, 0.3);
+        }
+        .glow-red {
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5), inset 0 0 10px rgba(239, 68, 68, 0.3);
+        }
         .card-hover:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 30px -5px rgba(56, 189, 248, 0.4);
         }
         /* Custom Smooth Scrollbar */
         ::-webkit-scrollbar {
@@ -123,12 +129,12 @@
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                           <span class="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
                         </span>
-                        <p class="text-xs lg:text-sm font-semibold text-slate-300">Pilih kotak di bawah untuk mulai berduel memperebutkan poin!</p>
+                        <p class="text-xs lg:text-sm font-semibold text-slate-300">Pilih kotak bernomor di bawah untuk mulai berduel memperebutkan poin!</p>
                     </div>
-                    <div class="flex items-center gap-5 text-xs font-semibold text-slate-400">
-                        <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500/20 border border-emerald-500"></span> Selesai</span>
-                        <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-cyan-500/20 border border-cyan-500"></span> Tersedia</span>
-                        <span class="bg-slate-800 text-slate-200 px-3 py-1 rounded-lg border border-slate-700">Total: <span id="completed-count" class="text-cyan-400 font-bold">0 / 30</span></span>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-slate-400 flex-wrap">
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500 border border-emerald-400"></span> Benar (Terkunci)</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-500 border border-rose-400"></span> Salah (Bisa Diulang)</span>
+                        <span class="bg-slate-800 text-slate-200 px-3 py-1 rounded-lg border border-slate-700">Selesai: <span id="completed-count" class="text-cyan-400 font-bold">0 / 30</span></span>
                     </div>
                 </div>
 
@@ -214,8 +220,8 @@
             <!-- Modal Header -->
             <div class="flex items-center justify-between pb-4 border-b border-slate-800">
                 <div class="flex items-center gap-3">
-                    <span id="modal-box-badge" class="px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 rounded-xl font-extrabold text-sm">
-                        Soal #1
+                    <span id="modal-box-badge" class="px-3.5 py-1.5 bg-cyan-500/15 text-cyan-400 border border-cyan-500/40 rounded-xl font-black text-base glow-blue">
+                        #1
                     </span>
                     <span id="modal-box-points" class="text-xs font-bold text-slate-300 bg-slate-800/80 px-3 py-1 rounded-lg border border-slate-700">
                         <i class="fa-solid fa-star text-amber-400 mr-1"></i> 100 Poin
@@ -336,17 +342,17 @@
 
     <!-- Team Config Modal -->
     <div id="config-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
-        <div class="bg-[#0B132B] border border-slate-700/80 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-5 max-h-[90vh] flex flex-col">
+        <div class="bg-[#0B132B] border border-slate-700/80 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-5 max-h-[90vh] flex flex-col">
             <div class="flex items-center justify-between pb-3 border-b border-slate-800">
                 <h3 class="text-base font-extrabold text-amber-400 flex items-center gap-2">
-                    <i class="fa-solid fa-users-gear"></i> Pengaturan Tim Arena
+                    <i class="fa-solid fa-users-gear"></i> Pengaturan Tim Arena & Warna Tema (30 Palet)
                 </h3>
                 <button onclick="closeConfigModal()" class="text-slate-400 hover:text-slate-200 bg-slate-800 w-8 h-8 rounded-lg flex items-center justify-center transition">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
-            <div id="team-inputs-container" class="space-y-3 overflow-y-auto pr-2 flex-1 max-h-[50vh]">
+            <div id="team-inputs-container" class="space-y-3 overflow-y-auto pr-2 flex-1 max-h-[55vh]">
                 <!-- Dynamically populated -->
             </div>
 
@@ -385,11 +391,13 @@
                 <div class="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 space-y-2">
                     <h4 class="font-bold text-amber-400 text-xs uppercase tracking-wider"><i class="fa-solid fa-gamepad mr-1"></i> Cara Bermain:</h4>
                     <ul class="list-disc pl-5 space-y-1 text-xs text-slate-300">
-                        <li>Tersedia kotak soal dengan tingkat kesulitan dan bobot poin berbeda.</li>
-                        <li>Klik salah satu kotak yang belum terbuka untuk melihat pertanyaan.</li>
+                        <li>Tersedia kotak soal bernomor dengan tingkat kesulitan dan bobot poin berbeda.</li>
+                        <li>Kotak bersinar biru muda. Klik salah satu untuk melihat pertanyaan.</li>
                         <li>Pilih tim yang akan menjawab pada menu pilihan tim di dalam kotak dialog.</li>
                         <li>Ketik jawaban dengan tepat (gunakan tanda minus <code>-</code> jika bernilai negatif).</li>
-                        <li>Jika benar, tim akan mendapatkan poin penuh sesuai kotak. Jika salah, kotak tertutup tanpa poin.</li>
+                        <li>Jika benar, kotak berubah menjadi <strong>neon hijau</strong> dan terkunci permanen.</li>
+                        <li>Jika salah, kotak berubah menjadi <strong>merah</strong> dan dapat dibuka serta dicoba kembali oleh tim lain.</li>
+                        <li>Setiap tim dapat memilih warna tema dari <strong>30 palet warna eksklusif</strong> pada menu Atur Tim.</li>
                         <li>Guru dapat mengakses <strong>Menu Admin</strong> dengan kode pengaman (<code>12345</code>) untuk mengubah, menambah, atau menghapus soal kapan saja.</li>
                         <li>Pemenang adalah tim dengan akumulasi poin tertinggi di akhir sesi!</li>
                     </ul>
@@ -419,24 +427,59 @@
     <!-- Complete Game Logic Script -->
     <script>
         // -------------------------------------------------------------
+        // 30 THEME COLOR PALETTES FOR TEAMS (FULL BACKGROUND & BORDER STYLING)
+        // -------------------------------------------------------------
+        const colorPalettes = [
+            { name: "Cyan Cyber", bg: "bg-cyan-950/70", border: "border-cyan-500", text: "text-cyan-300", badge: "bg-cyan-900 text-cyan-200" },
+            { name: "Amber Gold", bg: "bg-amber-950/70", border: "border-amber-500", text: "text-amber-300", badge: "bg-amber-900 text-amber-200" },
+            { name: "Emerald Matrix", bg: "bg-emerald-950/70", border: "border-emerald-500", text: "text-emerald-300", badge: "bg-emerald-900 text-emerald-200" },
+            { name: "Rose Ruby", bg: "bg-rose-950/70", border: "border-rose-500", text: "text-rose-300", badge: "bg-rose-900 text-rose-200" },
+            { name: "Indigo Royal", bg: "bg-indigo-950/70", border: "border-indigo-500", text: "text-indigo-300", badge: "bg-indigo-900 text-indigo-200" },
+            { name: "Violet Magic", bg: "bg-violet-950/70", border: "border-violet-500", text: "text-violet-300", badge: "bg-violet-900 text-violet-200" },
+            { name: "Sky Azure", bg: "bg-sky-950/70", border: "border-sky-500", text: "text-sky-300", badge: "bg-sky-900 text-sky-200" },
+            { name: "Fuchsia Neon", bg: "bg-fuchsia-950/70", border: "border-fuchsia-500", text: "text-fuchsia-300", badge: "bg-fuchsia-900 text-fuchsia-200" },
+            { name: "Teal Mint", bg: "bg-teal-950/70", border: "border-teal-500", text: "text-teal-300", badge: "bg-teal-900 text-teal-200" },
+            { name: "Lime Spring", bg: "bg-lime-950/70", border: "border-lime-500", text: "text-lime-300", badge: "bg-lime-900 text-lime-200" },
+            { name: "Orange Sunset", bg: "bg-orange-950/70", border: "border-orange-500", text: "text-orange-300", badge: "bg-orange-900 text-orange-200" },
+            { name: "Yellow Sun", bg: "bg-yellow-950/70", border: "border-yellow-500", text: "text-yellow-300", badge: "bg-yellow-900 text-yellow-200" },
+            { name: "Blue Cobalt", bg: "bg-blue-950/70", border: "border-blue-600", text: "text-blue-300", badge: "bg-blue-900 text-blue-200" },
+            { name: "Purple Grape", bg: "bg-purple-950/70", border: "border-purple-600", text: "text-purple-300", badge: "bg-purple-900 text-purple-200" },
+            { name: "Pink Blossom", bg: "bg-pink-950/70", border: "border-pink-500", text: "text-pink-300", badge: "bg-pink-900 text-pink-200" },
+            { name: "Red Crimson", bg: "bg-red-950/70", border: "border-red-600", text: "text-red-300", badge: "bg-red-900 text-red-200" },
+            { name: "Green Forest", bg: "bg-green-950/70", border: "border-green-600", text: "text-green-300", badge: "bg-green-900 text-green-200" },
+            { name: "Slate Steel", bg: "bg-slate-900/80", border: "border-slate-500", text: "text-slate-200", badge: "bg-slate-800 text-slate-100" },
+            { name: "Zinc Titanium", bg: "bg-zinc-900/80", border: "border-zinc-500", text: "text-zinc-200", badge: "bg-zinc-800 text-zinc-100" },
+            { name: "Neutral Stone", bg: "bg-stone-900/80", border: "border-stone-500", text: "text-stone-200", badge: "bg-stone-800 text-stone-100" },
+            { name: "Amber Bronze", bg: "bg-amber-950/80", border: "border-amber-700", text: "text-amber-500", badge: "bg-amber-900 text-amber-300" },
+            { name: "Cyan Deep", bg: "bg-cyan-950/80", border: "border-cyan-700", text: "text-cyan-200", badge: "bg-cyan-900 text-cyan-100" },
+            { name: "Emerald Dark", bg: "bg-emerald-950/80", border: "border-emerald-700", text: "text-emerald-200", badge: "bg-emerald-900 text-emerald-100" },
+            { name: "Indigo Deep", bg: "bg-indigo-950/80", border: "border-indigo-700", text: "text-indigo-200", badge: "bg-indigo-900 text-indigo-100" },
+            { name: "Violet Deep", bg: "bg-violet-950/80", border: "border-violet-700", text: "text-violet-200", badge: "bg-violet-900 text-violet-100" },
+            { name: "Rose Dark", bg: "bg-rose-950/80", border: "border-rose-700", text: "text-rose-200", badge: "bg-rose-900 text-rose-100" },
+            { name: "Teal Deep", bg: "bg-teal-950/80", border: "border-teal-700", text: "text-teal-200", badge: "bg-teal-900 text-teal-100" },
+            { name: "Orange Deep", bg: "bg-orange-950/80", border: "border-orange-700", text: "text-orange-200", badge: "bg-orange-900 text-orange-100" },
+            { name: "Sky Dark", bg: "bg-sky-950/80", border: "border-sky-700", text: "text-sky-200", badge: "bg-sky-900 text-sky-100" },
+            { name: "Fuchsia Deep", bg: "bg-fuchsia-950/80", border: "border-fuchsia-700", text: "text-fuchsia-200", badge: "bg-fuchsia-900 text-fuchsia-100" }
+        ];
+
+        // -------------------------------------------------------------
         // STATE MANAGEMENT
         // -------------------------------------------------------------
         let teams = [
-            { id: 1, name: "Tim Alpha", score: 0 },
-            { id: 2, name: "Tim Beta", score: 0 },
-            { id: 3, name: "Tim Gamma", score: 0 },
-            { id: 4, name: "Tim Delta", score: 0 },
-            { id: 5, name: "Tim Epsilon", score: 0 }
+            { id: 1, name: "Tim Alpha", score: 0, paletteIndex: 0 },
+            { id: 2, name: "Tim Beta", score: 0, paletteIndex: 1 },
+            { id: 3, name: "Tim Gamma", score: 0, paletteIndex: 2 },
+            { id: 4, name: "Tim Delta", score: 0, paletteIndex: 3 },
+            { id: 5, name: "Tim Epsilon", score: 0, paletteIndex: 4 }
         ];
 
         let questions = [];
         let currentSelectedBoxId = null;
 
         // -------------------------------------------------------------
-        // 30 QUESTIONS GENERATOR (STRICTLY CONFORMING TO REQUIREMENTS)
+        // 30 QUESTIONS GENERATOR
         // -------------------------------------------------------------
         function generateQuestions() {
-            // 1. 10 Pertanyaan Penjumlahan & Pengurangan Satuan & Puluhan termasuk Minus
             const cat1 = [
                 { q: "Berapakah hasil dari: 8 + (-5) = ...", a: "3", points: 100, type: "Satuan & Puluhan (Minus)" },
                 { q: "Hitunglah nilai dari: -12 + 15 = ...", a: "3", points: 100, type: "Satuan & Puluhan (Minus)" },
@@ -450,7 +493,6 @@
                 { q: "Berapakah hasil dari: 9 - 17 + 8 = ...", a: "0", points: 100, type: "Satuan & Puluhan (Minus)" }
             ];
 
-            // 2. 10 Pertanyaan Penjumlahan & Pengurangan Ratusan & Ribuan
             const cat2 = [
                 { q: "Berapakah hasil dari: 450 + 325 = ...", a: "775", points: 300, type: "Ratusan & Ribuan" },
                 { q: "Hitunglah nilai dari: 1250 - 480 = ...", a: "770", points: 300, type: "Ratusan & Ribuan" },
@@ -464,7 +506,6 @@
                 { q: "Tentukan hasil dari: 4321 + 5679 = ...", a: "10000", points: 300, type: "Ratusan & Ribuan" }
             ];
 
-            // 3. 5 Pertanyaan Soal Cerita tentang Pengurangan
             const cat3 = [
                 { q: "Ibu membeli 125 jeruk di pasar. Sebanyak 48 jeruk diberikan kepada tetangga dan 15 jeruk busuk dibuang. Berapa sisa jeruk ibu sekarang?", a: "62", points: 500, type: "Soal Cerita Pengurangan" },
                 { q: "Sebuah toko buku memiliki 500 eksemplar buku tulis. Terjual 185 buku pada hari Senin dan 210 buku pada hari Selasa. Berapa sisa buku di toko tersebut?", a: "105", points: 500, type: "Soal Cerita Pengurangan" },
@@ -473,7 +514,6 @@
                 { q: "Suhu air di dalam kulkas mula-mula 4 derajat Celsius. Setelah dimasukkan ke dalam freezer, suhunya turun 12 derajat Celsius. Berapa suhu air tersebut sekarang?", a: "-8", points: 500, type: "Soal Cerita Pengurangan" }
             ];
 
-            // 4. 5 Pertanyaan Soal Cerita tentang Pengurangan Bilangan Minus
             const cat4 = [
                 { q: "Suhu di kota A pada pagi hari adalah -3°C. Pada siang hari suhu naik, kemudian pada malam hari suhu turun lagi sebesar 5°C dari pagi hari. Berapa suhu kota A pada malam hari?", a: "-8", points: 600, type: "Soal Cerita Pengurangan Minus" },
                 { q: "Seekor ikan berada 15 meter di bawah permukaan laut (-15 m). Ikan tersebut berenang naik sejauh 7 meter, lalu turun lagi sejauh 12 meter. Berapa posisi kedalaman ikan sekarang (dalam meter)?", a: "-20", points: 600, type: "Soal Cerita Pengurangan Minus" },
@@ -490,7 +530,7 @@
                 answer: item.a.trim(),
                 points: item.points,
                 type: item.type,
-                answered: false,
+                status: 'normal',
                 answeredBy: null
             }));
         }
@@ -516,25 +556,35 @@
             document.getElementById('total-questions-stat').innerText = totalCount;
 
             questions.forEach((item, index) => {
-                if (item.answered) completedCount++;
+                if (item.status === 'correct') completedCount++;
 
                 const btn = document.createElement('button');
-                btn.className = `relative p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 border transition-all duration-200 min-h-[104px] ${
-                    item.answered 
-                        ? 'bg-slate-900/40 border-slate-800/80 text-slate-500 cursor-not-allowed opacity-50' 
-                        : 'bg-[#0F172A] hover:bg-slate-800 border-slate-700/80 hover:border-cyan-400 text-slate-100 card-hover cursor-pointer shadow-lg'
-                }`;
-                btn.disabled = item.answered;
+                
+                let boxClass = "";
+                if (item.status === 'correct') {
+                    boxClass = "bg-emerald-950/60 border-emerald-500 text-emerald-300 glow-neon-green cursor-not-allowed opacity-80";
+                } else if (item.status === 'wrong') {
+                    boxClass = "bg-rose-950/70 border-rose-500 text-rose-200 glow-red card-hover cursor-pointer";
+                } else {
+                    boxClass = "bg-[#0F172A] border-cyan-400/60 text-cyan-300 glow-blue card-hover cursor-pointer";
+                }
+
+                btn.className = `relative p-4 rounded-2xl flex flex-col items-center justify-center gap-1.5 border-2 transition-all duration-200 min-h-[104px] ${boxClass}`;
+                btn.disabled = (item.status === 'correct');
                 btn.onclick = () => openQuestionModal(item.id);
 
+                let statusBadge = "";
+                if (item.status === 'correct') {
+                    statusBadge = `<span class="text-[9px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-900 text-emerald-300 border border-emerald-600">${item.answeredBy || 'Selesai'}</span>`;
+                } else if (item.status === 'wrong') {
+                    statusBadge = `<span class="text-[9px] font-bold px-2.5 py-0.5 rounded-full bg-rose-900 text-rose-300 border border-rose-600">Salah (Coba Lagi)</span>`;
+                } else {
+                    statusBadge = `<span class="text-[9px] font-bold px-2.5 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">${item.points} Poin</span>`;
+                }
+
                 btn.innerHTML = `
-                    <span class="text-[10px] uppercase font-black tracking-widest ${item.answered ? 'text-slate-600' : 'text-cyan-400'}">Soal ${index + 1}</span>
-                    <span class="text-xl lg:text-2xl font-black ${item.answered ? 'text-slate-500' : 'text-slate-100'}">${item.points}</span>
-                    <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
-                        item.answered 
-                            ? 'bg-slate-900 text-slate-500' 
-                            : 'bg-slate-900 text-slate-300 border border-slate-700'
-                    }">${item.answered ? (item.answeredBy ? item.answeredBy : 'Selesai') : 'Tersedia'}</span>
+                    <span class="text-2xl lg:text-3xl font-black tracking-tight">#${index + 1}</span>
+                    ${statusBadge}
                 `;
 
                 gridContainer.appendChild(btn);
@@ -542,7 +592,6 @@
 
             document.getElementById('completed-count').innerText = `${completedCount} / ${totalCount}`;
 
-            // Check if all questions are completed and totalCount > 0
             if (totalCount > 0 && completedCount === totalCount) {
                 setTimeout(showPodiumModal, 600);
             }
@@ -552,7 +601,6 @@
             const listContainer = document.getElementById('leaderboard-list');
             listContainer.innerHTML = '';
 
-            // Sort descending by score
             const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
 
             sortedTeams.forEach((team, index) => {
@@ -562,8 +610,11 @@
                 else if (rank === 2) rankBadgeBg = "bg-slate-300 text-slate-950 font-extrabold border-slate-200";
                 else if (rank === 3) rankBadgeBg = "bg-amber-700 text-slate-100 font-extrabold border-amber-600";
 
+                const palette = colorPalettes[team.paletteIndex] || colorPalettes[0];
+
                 const div = document.createElement('div');
-                div.className = `p-3.5 rounded-xl bg-slate-950/70 border border-slate-800/90 flex items-center justify-between gap-3 relative overflow-hidden transition-all duration-300`;
+                // Entire entry card uses the team's palette background and border styling
+                div.className = `p-3.5 rounded-xl ${palette.bg} border ${palette.border} flex items-center justify-between gap-3 relative overflow-hidden transition-all duration-300 shadow-md`;
                 
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
@@ -571,13 +622,13 @@
                             ${rank}
                         </div>
                         <div>
-                            <h4 class="text-xs lg:text-sm font-extrabold text-slate-200 leading-tight">${team.name}</h4>
-                            <span class="text-[10px] text-slate-400 font-medium">Tim ID #${team.id}</span>
+                            <h4 class="text-xs lg:text-sm font-extrabold ${palette.text} leading-tight">${team.name}</h4>
+                            <span class="text-[10px] text-slate-400 font-medium">Tim ID #${team.id} &bull; <span class="${palette.badge} px-1.5 py-0.5 rounded text-[9px] font-bold border border-slate-700/50">${palette.name}</span></span>
                         </div>
                     </div>
                     <div class="text-right">
                         <span class="text-base lg:text-lg font-black text-amber-400">${team.score}</span>
-                        <span class="text-[9px] block text-slate-500 uppercase tracking-widest font-bold">Poin</span>
+                        <span class="text-[9px] block text-slate-400 uppercase tracking-widest font-bold">Poin</span>
                     </div>
                 `;
                 listContainer.appendChild(div);
@@ -604,7 +655,7 @@
             if (!q) return;
 
             const displayIndex = questions.findIndex(item => item.id === id) + 1;
-            document.getElementById('modal-box-badge').innerText = `Soal #${displayIndex}`;
+            document.getElementById('modal-box-badge').innerText = `#${displayIndex}`;
             document.getElementById('modal-box-points').innerHTML = `<i class="fa-solid fa-star text-amber-400 mr-1"></i> ${q.points} Poin`;
             document.getElementById('modal-category-tag').innerText = q.type;
             document.getElementById('modal-question-text').innerText = q.question;
@@ -661,12 +712,12 @@
 
             if (userAnswer === q.answer) {
                 team.score += q.points;
-                q.answered = true;
+                q.status = 'correct';
                 q.answeredBy = team.name;
 
                 feedbackArea.className = "p-3.5 rounded-xl text-sm font-semibold flex items-center gap-3 bg-emerald-950/70 border border-emerald-800 text-emerald-200";
                 feedbackIcon.className = "fa-solid fa-circle-check text-emerald-400 text-lg";
-                feedbackText.innerHTML = `<strong>Benar!</strong> ${team.name} meraih +${q.points} poin.`;
+                feedbackText.innerHTML = `<strong>Benar!</strong> ${team.name} meraih +${q.points} poin. Kotak terkunci (Neon Hijau).`;
 
                 renderGrid();
                 renderLeaderboard();
@@ -679,12 +730,12 @@
                 }, 1600);
 
             } else {
-                q.answered = true;
-                q.answeredBy = `${team.name} (Gagal)`;
+                q.status = 'wrong';
+                q.answeredBy = team.name;
 
                 feedbackArea.className = "p-3.5 rounded-xl text-sm font-semibold flex items-center gap-3 bg-rose-950/70 border border-rose-800 text-rose-200";
                 feedbackIcon.className = "fa-solid fa-circle-xmark text-rose-400 text-lg";
-                feedbackText.innerHTML = `<strong>Kurang Tepat!</strong> Jawaban benar: <span class="underline font-bold">${q.answer}</span>. Kotak ditutup tanpa poin.`;
+                feedbackText.innerHTML = `<strong>Kurang Tepat / Salah!</strong> Kotak berubah menjadi merah dan dapat dicoba kembali oleh tim lain.`;
 
                 renderGrid();
                 renderLeaderboard();
@@ -705,19 +756,18 @@
             const podiumDisplay = document.getElementById('podium-display');
             podiumDisplay.innerHTML = '';
 
-            // Sort teams descending by score
             const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
             const top3 = sortedTeams.slice(0, 3);
 
-            // Display order for visual podium: 2nd place (left), 1st place (center/top), 3rd place (right)
             const podiumOrder = [];
             if (top3[1]) podiumOrder.push({ team: top3[1], rank: 2, trophyColor: "text-slate-300", bgPodium: "bg-slate-900/90 border-slate-700", badgeText: "Juara 2" });
             if (top3[0]) podiumOrder.unshift({ team: top3[0], rank: 1, trophyColor: "text-amber-400", bgPodium: "bg-amber-950/40 border-amber-500/80 glow-gold", badgeText: "Juara 1" });
             if (top3[2]) podiumOrder.push({ team: top3[2], rank: 3, trophyColor: "text-amber-700", bgPodium: "bg-slate-900/90 border-amber-900/60", badgeText: "Juara 3" });
 
             podiumOrder.forEach((item) => {
+                const palette = colorPalettes[item.team.paletteIndex] || colorPalettes[0];
                 const div = document.createElement('div');
-                div.className = `p-5 rounded-2xl border ${item.bgPodium} flex flex-col items-center text-center space-y-3 relative overflow-hidden`;
+                div.className = `p-5 rounded-2xl border ${palette.border} ${item.bgPodium} flex flex-col items-center text-center space-y-3 relative overflow-hidden`;
                 
                 div.innerHTML = `
                     <div class="absolute top-3 right-3 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
@@ -727,7 +777,7 @@
                         <i class="fa-solid fa-trophy"></i>
                     </div>
                     <div>
-                        <h4 class="text-base font-extrabold text-slate-100">${item.team.name}</h4>
+                        <h4 class="text-base font-extrabold ${palette.text}">${item.team.name}</h4>
                         <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Skor Akhir</span>
                     </div>
                     <div class="text-2xl font-black text-amber-400">
@@ -786,7 +836,7 @@
 
         function closeAdminModal() {
             document.getElementById('admin-modal').classList.add('hidden');
-            renderGrid(); // Refresh grid and points live immediately
+            renderGrid();
             renderLeaderboard();
         }
 
@@ -857,7 +907,7 @@
                 answer: "0",
                 points: 200,
                 type: "Kategori Baru",
-                answered: false,
+                status: 'normal',
                 answeredBy: null
             });
             renderAdminQuestionsList();
@@ -889,16 +939,33 @@
             container.innerHTML = '';
 
             teams.forEach((team, index) => {
+                let optionsHtml = '';
+                colorPalettes.forEach((palette, pIdx) => {
+                    const selected = team.paletteIndex === pIdx ? 'selected' : '';
+                    optionsHtml += `<option value="${pIdx}" ${selected}>Palet #${pIdx + 1}: ${palette.name}</option>`;
+                });
+
                 const div = document.createElement('div');
-                div.className = "flex items-center gap-2";
+                div.className = "bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 space-y-2.5";
                 div.innerHTML = `
-                    <div class="flex-1 space-y-1">
-                        <label class="text-[10px] font-bold text-slate-400 uppercase">Tim ${index + 1}:</label>
-                        <input type="text" id="team-name-input-${team.id}" value="${team.name}" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-slate-200 text-sm font-semibold focus:outline-none focus:border-amber-500 transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-400">Tim ${index + 1}</span>
+                        <button onclick="removeTeam(${team.id})" class="px-2 py-1 bg-rose-950/60 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded-lg text-xs font-bold transition flex items-center gap-1" title="Hapus Tim">
+                            <i class="fa-solid fa-trash-can"></i> Hapus
+                        </button>
                     </div>
-                    <button onclick="removeTeam(${team.id})" class="mt-4 p-2.5 bg-rose-950/50 hover:bg-rose-900/70 text-rose-300 border border-rose-800/60 rounded-xl transition" title="Hapus Tim">
-                        <i class="fa-solid fa-trash-can text-xs"></i>
-                    </button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase">Nama Tim:</label>
+                            <input type="text" id="team-name-input-${team.id}" value="${team.name}" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500 transition">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase">Warna Tema (30 Palet):</label>
+                            <select id="team-palette-input-${team.id}" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 text-xs font-semibold focus:outline-none focus:border-amber-500 transition">
+                                ${optionsHtml}
+                            </select>
+                        </div>
+                    </div>
                 `;
                 container.appendChild(div);
             });
@@ -906,7 +973,8 @@
 
         function addNewTeam() {
             const newId = teams.length > 0 ? Math.max(...teams.map(t => t.id)) + 1 : 1;
-            teams.push({ id: newId, name: `Tim ${String.fromCharCode(65 + teams.length)}`, score: 0 });
+            const nextPalette = teams.length % colorPalettes.length;
+            teams.push({ id: newId, name: `Tim ${String.fromCharCode(65 + teams.length)}`, score: 0, paletteIndex: nextPalette });
             renderTeamConfigInputs();
         }
 
@@ -921,15 +989,19 @@
 
         function saveTeamNames() {
             teams.forEach(team => {
-                const input = document.getElementById(`team-name-input-${team.id}`);
-                if (input && input.value.trim() !== '') {
-                    team.name = input.value.trim();
+                const inputName = document.getElementById(`team-name-input-${team.id}`);
+                const inputPalette = document.getElementById(`team-palette-input-${team.id}`);
+                if (inputName && inputName.value.trim() !== '') {
+                    team.name = inputName.value.trim();
+                }
+                if (inputPalette) {
+                    team.paletteIndex = parseInt(inputPalette.value) || 0;
                 }
             });
             renderLeaderboard();
             populateTeamSelects();
             closeConfigModal();
-            showMsgModal("Berhasil", "Pengaturan tim berhasil diperbarui!", "success");
+            showMsgModal("Berhasil", "Pengaturan tim dan warna tema berhasil diperbarui!", "success");
         }
 
         function openGuideModal() {
@@ -972,7 +1044,6 @@
             document.getElementById('msg-modal').classList.add('hidden');
         }
 
-        // Enter key shortcut for answer input & admin password
         document.getElementById('answer-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 submitAnswer();
